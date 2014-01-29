@@ -24,6 +24,14 @@ $log->warnf('This is a %s message: %s', 'warn');
 $log->critf('This is a %s message: %s', 'crit');
 ```
 
+## DEPENDENCIES
+
+\Log\Buffered has the dependencies on the following:
+
+* [\Term\ANSIColor](https://github.com/travail/php-Term-ANSIColor)
+* [\Log\Minimal](https://github.com/travail/php-Log-Minimal)
+
+
 ## METHODS
 
 ### __construct
