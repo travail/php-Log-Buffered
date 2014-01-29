@@ -28,9 +28,7 @@ $log->critf('This is a %s message: %s', 'crit');
 
 \Log\Buffered has the dependencies on the following:
 
-* [\Term\ANSIColor](https://github.com/travail/php-Term-ANSIColor)
 * [\Log\Minimal](https://github.com/travail/php-Log-Minimal)
-
 
 ## METHODS
 
