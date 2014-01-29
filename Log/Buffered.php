@@ -4,9 +4,9 @@ namespace Log;
 
 class Buffered extends \Log\Minimal
 {
-    const MIN_BUFFER_SIZE     = 1024;
-    const MAX_BUFFER_SIZE     = 5120000;
-    const DEFAULT_BUFFER_SIZE = 5120;
+    const MIN_BUFFER_SIZE     = 1024;    // 1K
+    const MAX_BUFFER_SIZE     = 5120000; // 5M
+    const DEFAULT_BUFFER_SIZE = 5120;    // 5K
 
     protected $buffer      = null;
     protected $buffer_size = self::DEFAULT_BUFFER_SIZE;
@@ -40,7 +40,7 @@ class Buffered extends \Log\Minimal
     public function append($message)
     {
         $this->buffer .= $message;
-        if ($this->length() > $this->buffer_size) {
+        if ($this->getBufferedSize() > $this->buffer_size) {
             $this->overflow();
         }
     }
@@ -54,11 +54,6 @@ class Buffered extends \Log\Minimal
     public function clear()
     { 
         $this->buffer = null;
-    }
-
-    public function length()
-    {
-        return strlen($this->buffer);
     }
 
     protected function overflow()
@@ -93,8 +88,13 @@ class Buffered extends \Log\Minimal
         $this->buffer_size = $size;
     }
 
+    public function getBufferedSize()
+    {
+        return strlen($this->buffer);
+    }
+
     function __destruct()
     {
-        if ($this->length() > 0) $this->flush();
+        if ($this->getBufferedSize() > 0) $this->flush();
     }
 }
