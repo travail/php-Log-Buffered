@@ -165,3 +165,5 @@ $log->debugf('This is a %s message: %s', 'debug');
 travail
 
 ## LICENSE
+
+This library is free software. You can redistribute it and/or modify it under the same terms as PHP itself.
