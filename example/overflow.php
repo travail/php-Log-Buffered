@@ -1,10 +1,10 @@
 <?php
 
 // TODO: Delete later
-require_once '/home/travail/git/php-term-ansicolor/Term/ANSIColor.php';
-require_once '/home/travail/git/php-log-minimal/Log/Minimal.php';
+require_once '/home/travail/git/php-Term-ANSIColor/lib/Term/ANSIColor.php';
+require_once '/home/travail/git/php-Log-Minimal/lib/Log/Minimal.php';
 
-require_once dirname(dirname(__FILE__)) . '/Log/Buffered.php';
+require_once dirname(dirname(__FILE__)) . '/lib/Log/Buffered.php';
 
 main();
 exit;
