@@ -1,0 +1,6 @@
+[submodule "vendor/Term-ANSIColor"]
+	path = vendor/Term-ANSIColor
+	url = git@github.com:travail/php-Term-ANSIColor.git
+[submodule "vendor/Log-Minimal"]
+	path = vendor/Log-Minimal
+	url = git@github.com:travail/php-Log-Minimal.git
