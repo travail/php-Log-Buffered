@@ -58,7 +58,7 @@ class Buffered extends \Log\Minimal
 
     public function flush()
     {
-        fputs(STDERR, $this->buffer);
+        fwrite($this->fd, $this->buffer);
         $this->clear();
     }
 
@@ -102,6 +102,11 @@ class Buffered extends \Log\Minimal
     public function getBufferedSize()
     {
         return strlen($this->buffer);
+    }
+
+    public function getFile()
+    {
+        return $this->file;
     }
 
     function __destruct()
