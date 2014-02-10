@@ -7,9 +7,12 @@ class Buffered extends \Log\Minimal
     const MIN_BUFFER_SIZE     = 1024;    // 1K
     const MAX_BUFFER_SIZE     = 5120000; // 5M
     const DEFAULT_BUFFER_SIZE = 5120;    // 5K
+    const DEFAULT_FILE        = 'php://stderr';
 
     protected $buffer      = null;
     protected $buffer_size = self::DEFAULT_BUFFER_SIZE;
+    protected $file        = self::DEFAULT_FILE;
+    protected $fd          = null;
 
     function __construct($attrs = array())
     {
@@ -21,6 +24,14 @@ class Buffered extends \Log\Minimal
             parent::$log_level = $attrs['log_level'];
         if (isset($attrs['trace_level']))
             parent::$trace_level = $attrs['trace_level'];
+
+        if (isset($attrs['file']) && !is_readable($attrs['file']))
+            throw new \Exception(sprintf('%s is not readable', $attrs['file']));
+        if (isset($attrs['file']) && !is_writable($attrs['file']))
+            throw new \Exception(sprintf('%s is not writable', $attrs['file']));
+
+        if (isset($attrs['file'])) $this->file = $attrs['file'];
+        $this->fd = fopen($this->file, 'a+');
 
         if (isset($attrs['buffer_size']) && $attrs['buffer_size'] < self::MIN_BUFFER_SIZE)
             throw new \Exception('buffer_size must be more than ' . self::MIN_BUFFER_SIZE);
@@ -47,7 +58,7 @@ class Buffered extends \Log\Minimal
 
     public function flush()
     {
-        fputs(STDERR, $this->buffer);
+        fwrite($this->fd, $this->buffer);
         $this->clear();
     }
 
@@ -91,6 +102,11 @@ class Buffered extends \Log\Minimal
     public function getBufferedSize()
     {
         return strlen($this->buffer);
+    }
+
+    public function getFile()
+    {
+        return $this->file;
     }
 
     function __destruct()
