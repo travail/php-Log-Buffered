@@ -63,4 +63,42 @@ class FunctionalNewTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($e instanceof \Exception);
         $this->assertFalse($logger instanceof \Log\Buffered);
     }
+
+    public function testNewWithInvalidMinBufferSize()
+    {
+        $logger    = '';
+        $exception = '';
+        try {
+            $logger = new \Log\Buffered(
+                array(
+                    'buffer_size' => \Log\Buffered::MIN_BUFFER_SIZE - 1
+                )
+            );
+        }
+        catch (\Exception $e) {
+            $exception = $e;
+        }
+
+        $this->assertTrue($e instanceof \Exception);
+        $this->assertFalse($logger instanceof \Log\Buffered);
+    }
+
+    public function testNewWithInvalidMaxBufferSize()
+    {
+        $logger    = '';
+        $exception = '';
+        try {
+            $logger = new \Log\Buffered(
+                array(
+                    'buffer_size' => \Log\Buffered::MAX_BUFFER_SIZE + 1
+                )
+            );
+        }
+        catch (\Exception $e) {
+            $exception = $e;
+        }
+
+        $this->assertTrue($e instanceof \Exception);
+        $this->assertFalse($logger instanceof \Log\Buffered);
+    }
 }
