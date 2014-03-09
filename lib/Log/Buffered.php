@@ -61,10 +61,10 @@ class Buffered extends \Log\Minimal
         if (isset($attrs['trace_level']))
             parent::$trace_level = $attrs['trace_level'];
 
-        if (file_exists($attrs['file'])) {
-            if (isset($attrs['file']) && !is_readable($attrs['file']))
+        if (isset($attrs['file']) && file_exists($attrs['file'])) {
+            if (!is_readable($attrs['file']))
                 throw new \Exception(sprintf('%s is not readable', $attrs['file']));
-            if (isset($attrs['file']) && !is_writable($attrs['file']))
+            if (!is_writable($attrs['file']))
                 throw new \Exception(sprintf('%s is not writable', $attrs['file']));
         }
 
