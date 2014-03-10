@@ -5,6 +5,11 @@ namespace Log;
 class Buffered extends \Log\Minimal
 {
     /**
+     * @var string The version of \Log\Buffered
+     */
+    const VERSION = '0.0.1';
+
+    /**
      * @var int Min buffer size
      */
     const MIN_BUFFER_SIZE = 1024; // 1K
