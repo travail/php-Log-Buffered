@@ -26,7 +26,7 @@ $log->critf('This is a %s message: %s', 'crit');
 
 ## DEPENDENCIES
 
-\Log\Buffered has the dependencies on the following:
+\Log\Buffered has the dependency on the following:
 
 * [\Log\Minimal](https://github.com/travail/php-Log-Minimal)
 
@@ -39,6 +39,10 @@ $log->critf('This is a %s message: %s', 'crit');
 #### Parameters
 
 `$attrs` can contain the keys below:
+
+##### file
+
+Path to a file into which logger writes.
 
 ##### color
 

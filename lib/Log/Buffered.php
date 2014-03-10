@@ -4,16 +4,57 @@ namespace Log;
 
 class Buffered extends \Log\Minimal
 {
-    const MIN_BUFFER_SIZE     = 1024;    // 1K
-    const MAX_BUFFER_SIZE     = 5120000; // 5M
-    const DEFAULT_BUFFER_SIZE = 5120;    // 5K
-    const DEFAULT_FILE        = 'php://stderr';
+    /**
+     * @var string The version of \Log\Buffered
+     */
+    const VERSION = '0.0.1';
 
-    protected $buffer      = null;
+    /**
+     * @var int Min buffer size
+     */
+    const MIN_BUFFER_SIZE = 1024; // 1K
+
+    /**
+     * @var int Max buffer size
+     */
+    const MAX_BUFFER_SIZE = 5120000; // 5M
+
+    /**
+     *  @var int Default buffer size
+     */
+    const DEFAULT_BUFFER_SIZE = 5120; // 5K
+
+    /**
+     * @var string Default file path to which logger write
+     */
+    const DEFAULT_FILE = 'php://stderr';
+
+    /**
+     * @var string Buffer in which logger store messages
+     */
+    protected $buffer;
+
+    /**
+     * @var int Buffer size
+     */
     protected $buffer_size = self::DEFAULT_BUFFER_SIZE;
-    protected $file        = self::DEFAULT_FILE;
-    protected $fd          = null;
 
+    /**
+     * @var string File path to which logger write, self::DEFAULT_FILE by default
+     */
+    protected $file = self::DEFAULT_FILE;
+
+    /**
+     * @var resource File handle
+     */
+    protected $fd;
+
+    /**
+     * Create a new instance of \Log\Bufferd
+     *
+     * @param array $attrs
+     * @throws \Exception
+     */
     function __construct($attrs = array())
     {
         if (isset($attrs['color']))
@@ -25,10 +66,12 @@ class Buffered extends \Log\Minimal
         if (isset($attrs['trace_level']))
             parent::$trace_level = $attrs['trace_level'];
 
-        if (isset($attrs['file']) && !is_readable($attrs['file']))
-            throw new \Exception(sprintf('%s is not readable', $attrs['file']));
-        if (isset($attrs['file']) && !is_writable($attrs['file']))
-            throw new \Exception(sprintf('%s is not writable', $attrs['file']));
+        if (isset($attrs['file']) && file_exists($attrs['file'])) {
+            if (!is_readable($attrs['file']))
+                throw new \Exception(sprintf('%s is not readable', $attrs['file']));
+            if (!is_writable($attrs['file']))
+                throw new \Exception(sprintf('%s is not writable', $attrs['file']));
+        }
 
         if (isset($attrs['file'])) $this->file = $attrs['file'];
         $this->fd = fopen($this->file, 'a+');
@@ -48,6 +91,12 @@ class Buffered extends \Log\Minimal
         };
     }
 
+    /**
+     * Append a message into the buffer.
+     *
+     * @param string $message A message
+     * @return void
+     */
     public function append($message)
     {
         $this->buffer .= $message;
@@ -56,17 +105,33 @@ class Buffered extends \Log\Minimal
         }
     }
 
+    /**
+     * Flush messages.
+     *
+     * @return void
+     */
     public function flush()
     {
         fwrite($this->fd, $this->buffer);
         $this->clear();
     }
 
+    /**
+     * Clear the buffer.
+     *
+     * @return void
+     */
     public function clear()
     { 
         $this->buffer = null;
     }
 
+    /**
+     * Print the caution and flush the buffer
+     * when buffered messages reach \Log\Buffered::MAX_BUFFER_SIZE.
+     *
+     * @return void
+     */
     protected function overflow()
     {
         $this->buffer .= sprintf(
@@ -79,36 +144,72 @@ class Buffered extends \Log\Minimal
         $this->flush();
     }
 
+    /**
+     * Return \Log\Buffered::MIN_BUFFER_SIZE.
+     *
+     * @return int \Log\Buffered::MIN_BUFFER_SIZE
+     */
     public function getMinBufferSize()
     {
         return self::MIN_BUFFER_SIZE;
     }
 
+    /**
+     * Return \Log\Buffered::MAX_BUFFER_SIZE.
+     *
+     * @return int \Log\Buffered::MAX_BUFFER_SIZE
+     */
     public function getMaxBufferSize()
     {
         return self::MAX_BUFFER_SIZE;
     }
 
+    /**
+     * Return the size of buffer.
+     *
+     * @return int Size of buffer
+     */
     public function getBufferSize()
     {
         return $this->buffer_size;
     }
 
+    /**
+     * Set passed size to buffer size.
+     *
+     * @param int $size Size of the buffer
+     * @return void
+     */
     public function setBufferSize($size)
     {
         $this->buffer_size = $size;
     }
 
+    /**
+     * Return current size of buffered messages.
+     *
+     * @return int Current size of bffered messages
+     */
     public function getBufferedSize()
     {
         return strlen($this->buffer);
     }
 
+    /**
+     * Return the path to file to which logger print messages.
+     *
+     * @return string The path to file to which logger print messages
+     */
     public function getFile()
     {
         return $this->file;
     }
 
+    /**
+     * Flush the buffer when messages buffered.
+     *
+     * @return void
+     */
     function __destruct()
     {
         if ($this->getBufferedSize() > 0) $this->flush();
