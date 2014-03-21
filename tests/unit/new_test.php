@@ -1,9 +1,9 @@
 <?php
 
 /**
- * @group functional
+ * @group unit
  */
-class FunctionalNewTest extends PHPUnit_Framework_TestCase
+class UnitNewTest extends PHPUnit_Framework_TestCase
 {
     public function testNew()
     {
