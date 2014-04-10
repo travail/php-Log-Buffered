@@ -2,7 +2,7 @@
 
 namespace Log;
 
-class Buffered extends \Log\Minimal
+class Buffered extends Minimal
 {
     /**
      * @var string The version of \Log\Buffered
@@ -147,7 +147,7 @@ class Buffered extends \Log\Minimal
     /**
      * Return \Log\Buffered::MIN_BUFFER_SIZE.
      *
-     * @return int \Log\Buffered::MIN_BUFFER_SIZE
+     * @return int
      */
     public function getMinBufferSize()
     {
@@ -157,7 +157,7 @@ class Buffered extends \Log\Minimal
     /**
      * Return \Log\Buffered::MAX_BUFFER_SIZE.
      *
-     * @return int \Log\Buffered::MAX_BUFFER_SIZE
+     * @return int
      */
     public function getMaxBufferSize()
     {

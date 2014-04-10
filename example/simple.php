@@ -1,8 +1,6 @@
 <?php
 
-require_once dirname(dirname(__FILE__)) . '/vendor/Term-ANSIColor/lib/Term/ANSIColor.php';
-require_once dirname(dirname(__FILE__)) . '/vendor/Log-Minimal/lib/Log/Minimal.php';
-require_once dirname(dirname(__FILE__)) . '/lib/Log/Buffered.php';
+require_once __DIR__ . '/../vendor/autoload.php';
 
 main();
 exit;
