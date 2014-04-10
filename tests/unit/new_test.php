@@ -7,6 +7,7 @@ class UnitNewTest extends PHPUnit_Framework_TestCase
 {
     public function testNew()
     {
+        $logger = null;
         try {
             $logger = new \Log\Buffered();
         }
@@ -18,6 +19,7 @@ class UnitNewTest extends PHPUnit_Framework_TestCase
 
     public function testNewWithParameter()
     {
+        $logger = null;
         $file = '/tmp/log-buffered.log';
         try {
             $logger = new \Log\Buffered(
@@ -39,9 +41,8 @@ class UnitNewTest extends PHPUnit_Framework_TestCase
 
     public function testNewWithInvalidFile()
     {
-        $logger    = '';
-        $file      = '/tmp/log-buffered-unreadable.log';
-        $exception = '';
+        $logger = null;
+        $file = '/tmp/log-buffered-unreadable.log';
         touch($file);
         chmod($file, 0444);
         try {
@@ -54,51 +55,49 @@ class UnitNewTest extends PHPUnit_Framework_TestCase
                     'buffer_size' => \Log\Buffered::DEFAULT_BUFFER_SIZE,
                 )
             );
+            $this->fail();
         }
         catch (\Exception $e) {
-            $exception = $e;
+            $this->assertTrue(true);
         }
         unlink($file);
 
-        $this->assertTrue($e instanceof \Exception);
         $this->assertFalse($logger instanceof \Log\Buffered);
     }
 
     public function testNewWithInvalidMinBufferSize()
     {
-        $logger    = '';
-        $exception = '';
+        $logger = null;
         try {
             $logger = new \Log\Buffered(
                 array(
                     'buffer_size' => \Log\Buffered::MIN_BUFFER_SIZE - 1
                 )
             );
+            $this->fail();
         }
         catch (\Exception $e) {
-            $exception = $e;
+            $this->assertTrue(true);
         }
 
-        $this->assertTrue($e instanceof \Exception);
         $this->assertFalse($logger instanceof \Log\Buffered);
     }
 
     public function testNewWithInvalidMaxBufferSize()
     {
-        $logger    = '';
-        $exception = '';
+        $logger = null;
         try {
             $logger = new \Log\Buffered(
                 array(
                     'buffer_size' => \Log\Buffered::MAX_BUFFER_SIZE + 1
                 )
             );
+            $this->fail();
         }
         catch (\Exception $e) {
-            $exception = $e;
+            $this->assertTrue(true);
         }
 
-        $this->assertTrue($e instanceof \Exception);
         $this->assertFalse($logger instanceof \Log\Buffered);
     }
 }
