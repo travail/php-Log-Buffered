@@ -1,5 +1,7 @@
 <?php
 
+use \Log\Buffered;
+
 require_once __DIR__ . '/../vendor/autoload.php';
 
 main();
@@ -7,9 +9,9 @@ exit;
 
 function main()
 {
-    $log = new \Log\Buffered(
+    $log = new Buffered(
         array(
-            'buffer_size' => \Log\Buffered::MIN_BUFFER_SIZE,
+            'buffer_size' => Buffered::MIN_BUFFER_SIZE,
         )
     );
     for ($i = 0; $i < 10; $i++) {
