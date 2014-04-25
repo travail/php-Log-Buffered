@@ -25,7 +25,7 @@ $log->critf('This is a %s message', 'crit');
 ```
 
 ## INSTALLATION
-To install this package into your project via composer, add the following snippet to your `composer.json`. Then run `composer update`.
+To install this package into your project via composer, add the following snippet to your `composer.json`. Then run `composer install`.
 
 ```
 "require": {
