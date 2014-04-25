@@ -1,4 +1,5 @@
-# \Log\Beffered
+\Log\Beffered
+========
 
 ## NAME
 
@@ -21,6 +22,21 @@ $log->debugf('This is a %s message', 'debug'); // This message never be output
 $log->infof('This is an %s message', 'info');
 $log->warnf('This is a %s message', 'warn');
 $log->critf('This is a %s message', 'crit');
+```
+
+## INSTALLATION
+This package is not distributed on [packgist](https://packagist.org) for now. To install this package into your project via composer, add the following snippet to your `composer.json`. Then run `composer update`.
+
+```
+"require": {
+    "travail/log-buffered": "dev-master"
+},
+"repositories": [
+    {
+        "type": "vcs",
+        "url": "git@github.com:travail/php-Log-Buffered.git"
+    }
+]
 ```
 
 ## DEPENDENCIES
