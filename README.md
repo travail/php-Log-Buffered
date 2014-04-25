@@ -25,12 +25,17 @@ $log->critf('This is a %s message', 'crit');
 ```
 
 ## INSTALLATION
-This package is not distributed on [packgist](https://packagist.org) for now. To install this package into your project via composer, add the following snippet to your `composer.json`. Then run `composer update`.
+To install this package into your project via composer, add the following snippet to your `composer.json`. Then run `composer update`.
 
 ```
 "require": {
     "travail/log-buffered": "dev-master"
-},
+}
+```
+
+If you want to install from gihub, add the following:
+
+```
 "repositories": [
     {
         "type": "vcs",
