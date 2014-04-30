@@ -1,5 +1,7 @@
 <?php
 
+use \Log\Buffered;
+
 require_once __DIR__ . '/../vendor/autoload.php';
 
 main();
@@ -7,7 +9,7 @@ exit;
 
 function main()
 {
-    $log = new \Log\Buffered(
+    $log = new Buffered(
         array(
             'file' => '/tmp/log-buffered.log'
         )

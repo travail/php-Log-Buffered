@@ -1,4 +1,5 @@
-# \Log\Beffered
+\Log\Beffered
+========
 
 ## NAME
 
@@ -7,21 +8,40 @@
 ## SYNOPSIS
 
 ```php
-// Load the dependencies first
-require_once '/path/to/Term/ANSIColor.php';
-require_once '/path/to/Log/Minimal.php'
+use \Log\Buffered;
 
-require_once '/path/to/Log/Buffered.php';
+require_once '/path/to/vendor/autoload.php';
 
-$log = new \Log\Buffered(
+$log = new Buffered(
     array(
-        'buffer_size' => 10240, // 5120 bytes by default
+        'file'        => '/paht/to/myapp.log', // stderr by default
+        'buffer_size' => 10240,                // 5120 bytes by default
     )
 );
-$log->debugf('This is a %s message: %s', 'debug'); // This message never be output
-$log->infof('This is an %s message: %s', 'info');
-$log->warnf('This is a %s message: %s', 'warn');
-$log->critf('This is a %s message: %s', 'crit');
+$log->debugf('This is a %s message', 'debug'); // This message never be output
+$log->infof('This is an %s message', 'info');
+$log->warnf('This is a %s message', 'warn');
+$log->critf('This is a %s message', 'crit');
+```
+
+## INSTALLATION
+To install this package into your project via composer, add the following snippet to your `composer.json`. Then run `composer install`.
+
+```
+"require": {
+    "travail/log-buffered": "dev-master"
+}
+```
+
+If you want to install from gihub, add the following:
+
+```
+"repositories": [
+    {
+        "type": "vcs",
+        "url": "git@github.com:travail/php-Log-Buffered.git"
+    }
+]
 ```
 
 ## DEPENDENCIES
