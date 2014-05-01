@@ -5,9 +5,9 @@ namespace Log;
 class Buffered extends Minimal
 {
     /**
-     * @var string The version of \Log\Buffered
+     * @var string The version of this package
      */
-    const VERSION = '0.0.1';
+    const VERSION = '0.1.0';
 
     /**
      * @var int Min buffer size
