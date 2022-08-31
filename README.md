@@ -3,20 +3,20 @@
 
 ## NAME
 
-\Log\Buffered -
+Log\Buffered -
 
 ## SYNOPSIS
 
 ```php
-use \Log\Buffered;
+use Log\Buffered;
 
 require_once '/path/to/vendor/autoload.php';
 
 $log = new Buffered(
-    array(
+    [
         'file'        => '/paht/to/myapp.log', // stderr by default
         'buffer_size' => 10240,                // 5120 bytes by default
-    )
+    ]
 );
 $log->debugf('This is a %s message', 'debug'); // This message never be output
 $log->infof('This is an %s message', 'info');
@@ -46,9 +46,9 @@ If you want to install from gihub, add the following:
 
 ## DEPENDENCIES
 
-\Log\Buffered has the dependency on the following:
+Log\Buffered has the dependency on the following:
 
-* [\Log\Minimal](https://github.com/travail/php-Log-Minimal)
+* [Log\Minimal](https://github.com/travail/php-Log-Minimal)
 
 ## METHODS
 
@@ -83,7 +83,7 @@ The depth of stack trace. `1` by default.
 
 ##### buffer_size
 
-Set the size of buffer which allow to buffer messages within given size. `5120 bytes` by default. You must specify this between `\Log\Buffered::MIN_BUFFER_SIZE` and `\Log\Buffered::MAX_BUFFER_SIZE`, or an `Exception` will be thrown.
+Set the size of buffer which allow to buffer messages within given size. `5120 bytes` by default. You must specify this between `Log\Buffered::MIN_BUFFER_SIZE` and `Log\Buffered::MAX_BUFFER_SIZE`, or an `Exception` will be thrown.
 
 ### debugf
 
@@ -107,7 +107,7 @@ These methods above buffer messages until buffered messages reach `buffer_size` 
 ***************************** CAUTION!!! **********************************
 Flush the buffer, because the size of buffered messages reached 1024.
 If you want to buffer more messages, set the more large size to buffer_size
-in the constructor or by calling \Log\Buffered::setBufferSize().
+in the constructor or by calling Log\Buffered::setBufferSize().
 ```
 
 #### Parameters
@@ -168,18 +168,18 @@ There are two ways to enable debug messages:
 ```php
 $_SERVER['LM_DEBUG']     = true;
 $_SERVER['LM_LOG_LEVEL'] = 'debug';
-$log = new \Log\Buffered();
+$log = new Log\Buffered();
 $log->debugf('This is a %s message: %s', 'debug');
 ```
 
 ### By Constructor
 
 ```php
-$log = new \Log\Buffered(
-    array(
+$log = new Log\Buffered(
+    [
         'debug'     => true,
         'log_level' => 'debug',
-    )
+    ]
 );
 $log->debugf('This is a %s message: %s', 'debug');
 ```
