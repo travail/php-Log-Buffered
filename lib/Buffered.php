@@ -32,7 +32,7 @@ class Buffered extends Minimal
     /**
      * @var string Buffer in which logger store messages
      */
-    protected $buffer;
+    protected $buffer= '';
 
     /**
      * @var int Buffer size
@@ -123,7 +123,7 @@ class Buffered extends Minimal
      */
     public function clear()
     { 
-        $this->buffer = null;
+        $this->buffer = '';
     }
 
     /**
