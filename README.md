@@ -1,4 +1,4 @@
-\Log\Beffered
+Log\Beffered
 ========
 
 ## NAME
